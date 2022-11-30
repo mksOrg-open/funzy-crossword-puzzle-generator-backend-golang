@@ -1,0 +1,6 @@
+fileignoreconfig:
+- filename: models/userModel.go
+  checksum: da746877878c7a5ecaa2646a2ce86b133d20205c35cae311b2983e83180d9652
+- filename: docs/README.md
+  checksum: 8aa0e483e893f9351528ff6842d3a885214512f4d20e1c33539fba660c04d685
+version: ""

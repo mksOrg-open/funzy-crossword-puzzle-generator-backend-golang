@@ -1,26 +1,31 @@
 package main
 
 import (
-	"net/http"
+	routes "funzy-backend-golang/routes"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
-var db = make(map[string]string)
+func main() {
+	port = os.Getenv("PORT")
 
-func setupRouter() *gin.Engine {
+	if port == "" {
+		port = "8000"
+	}
+	router := gin.New()
+	router.Use(gin.Logger())
 
-	router := gin.Default()
+	routes.AuthRoutes(router)
+	routes.UserRoutes(router)
 
-	router.GET("/ping", func(context *gin.Context) {
-		context.String(http.StatusOK, "pong")
+	router.GET("/api-1", func(c *gin.Context) {
+		c.JSON(200, gin.H{"success": "Access granted for api-1"})
 	})
 
-	return router
-}
+	router.GET("/api-2", func(c *gin.Context) {
+		c.JSON(200, gin.H{"success": "Access granted for api-2"})
+	})
 
-func main() {
-	router := setupRouter()
-
-	router.Run(":8080")
+	router.Run(":", port)
 }
